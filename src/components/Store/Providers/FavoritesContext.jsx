@@ -1,10 +1,11 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+// FavoritesProvider.jsx
+import React, { createContext, useState, useCallback } from 'react';
 
 const FavoritesContext = createContext();
 
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
-  const [ratings, setRatings] = useState({});  // Nuevo estado para las calificaciones
+  const [ratings, setRatings] = useState({});
 
   const addFavorite = useCallback((product) => {
     setFavorites((prevFavorites) => [...prevFavorites, product]);
@@ -34,14 +35,12 @@ export const FavoritesProvider = ({ children }) => {
       addFavorite, 
       removeFavorite, 
       isFavorite,
-      setRating,  // Nuevo método para establecer calificación
-      getRating,  // Nuevo método para obtener calificación
+      setRating,
+      getRating,
     }}>
       {children}
     </FavoritesContext.Provider>
   );
 };
 
-export const useFavorites = () => {
-  return useContext(FavoritesContext);
-};
+export default FavoritesContext;

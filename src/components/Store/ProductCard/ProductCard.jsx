@@ -1,9 +1,10 @@
-import React, { useReducer, useEffect, useCallback, useMemo } from 'react';
+import React, { useReducer, useEffect, useCallback, memo } from 'react';
 import './ProductCard.css';
-import { useFavorites } from '../Providers/FavoriteContext';
-import { reducer, initialState } from '../../../utils/reducer';
 
-const ProductCard = React.memo(({ product }) => {
+import { reducer, initialState } from '../../../utils/reducer';
+import useFavorites from '../../../hooks/useFavorites';
+
+const ProductCard = memo(({ product }) => {
   const { addFavorite, removeFavorite, isFavorite, getRating, setRating } = useFavorites();
 
   const [state, dispatch] = useReducer(reducer, {

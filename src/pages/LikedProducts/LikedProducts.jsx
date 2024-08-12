@@ -1,17 +1,17 @@
 import React from 'react';
 
 // Ajusta la ruta según tu estructura
-import { useFavorites } from '../../components/Store/Providers/FavoriteContext';
+
 import ProductCard from '../../components/Store/ProductCard/ProductCard';
+import useFavorites from '../../hooks/useFavorites';
 
 const LikedProducts = () => {
   const { favorites } = useFavorites();
 
   return (
     <div>
-      <h1>Productos Favoritos</h1>
       {favorites.length > 0 ? (
-        <div className='product-list'>
+        <div id='products'>
           {favorites.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

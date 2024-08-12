@@ -5,8 +5,7 @@ import Store from './pages/Store/Store';
 import Formulario from './pages/Formulario/Formulario';
 import Header from './components/Header/Header';
 import Favorites from './pages/LikedProducts/LikedProducts';
-import { FavoritesProvider } from './components/Store/Providers/FavoriteContext';
-
+import { FavoritesProvider } from './components/Store/Providers/FavoritesContext';
 
 function App() {
   return (
