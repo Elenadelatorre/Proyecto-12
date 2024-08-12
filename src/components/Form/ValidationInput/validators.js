@@ -1,4 +1,4 @@
-// validators.js
+// Componente para validar los <input> del formulario:
 export const validateFields = (fields) => {
   const errors = {};
 

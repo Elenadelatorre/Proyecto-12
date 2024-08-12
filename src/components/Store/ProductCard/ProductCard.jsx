@@ -1,9 +1,9 @@
 import React, { useReducer, useEffect, useCallback, memo } from 'react';
 import './ProductCard.css';
-
 import { reducer, initialState } from '../../../utils/reducer';
 import useFavorites from '../../../hooks/useFavorites';
 
+// Componente para renderizar cada producto en la tienda:
 const ProductCard = memo(({ product }) => {
   const { addFavorite, removeFavorite, isFavorite, getRating, setRating } = useFavorites();
 

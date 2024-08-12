@@ -1,0 +1,33 @@
+.not-found {
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-top: 10svh;
+  padding-bottom: 5svh;
+}
+
+.not-found h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.not-found p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.not-found a {
+  color: #007bff; 
+  text-decoration: none; 
+  font-weight: bold;
+  margin-top: 20px;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.not-found a:hover {
+  color: #0056b3; 
+}

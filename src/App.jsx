@@ -6,10 +6,12 @@ import Formulario from './pages/Formulario/Formulario';
 import Header from './components/Header/Header';
 import Favorites from './pages/LikedProducts/LikedProducts';
 import { FavoritesProvider } from './components/Store/Providers/FavoritesContext';
+import Footer from './components/Footer/Footer';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
-    <div>
+    <div className="app-container">
       <Header />
       <FavoritesProvider>
         <Routes>
@@ -17,8 +19,10 @@ function App() {
           <Route path='/form' element={<Formulario />}></Route>
           <Route path='/store' element={<Store />}></Route>
           <Route path='/favs' element={<Favorites />}></Route>
+          <Route path='*' element={<NotFound/>}></Route>
         </Routes>
       </FavoritesProvider>
+      <Footer />
     </div>
   );
 }

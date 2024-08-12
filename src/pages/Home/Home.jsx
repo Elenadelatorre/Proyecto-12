@@ -1,4 +1,4 @@
-import './Home.css'; // Asegúrate de tener los estilos para el layout
+import './Home.css'; 
 
 const Home = () => {
   return (

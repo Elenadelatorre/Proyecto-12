@@ -1,3 +1,4 @@
+// Componente para mostrar el mensaje de éxito de la inscripción:
 const SuccessMessage = () => (
   <div className='form-page'>
     <h2 className='title'>¡Gracias por tu inscripción!</h2>

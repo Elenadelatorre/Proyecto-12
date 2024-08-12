@@ -4,7 +4,10 @@ import FormInput from '../../components/Form/FormInput/FormInput';
 import { validateFields } from '../../components/Form/ValidationInput/validators';
 import SuccessMessage from '../../components/Form/CorrectForm/CorrectForm';
 import Instructions from '../../components/Form/Instructions/instructions';
+import MobileBrandSelect from '../../components/Form/MobileBrandSelect/MobileBrandSelect';
+import TermsCheckbox from '../../components/Form/TermCheckbox/TermCheckbox';
 
+// Componente para crear el formulario:
 const Formulario = () => {
   //Crear un 'estado' para controlar el envío:
   const [submitted, setSubmitted] = useState(false);
@@ -20,20 +23,8 @@ const Formulario = () => {
   const inputConcurso = useRef();
   const inputTerms = useRef();
 
-  // Definir las marcas de móviles
-  const mobileBrands = [
-    'Apple',
-    'Samsung',
-    'Google',
-    'OnePlus',
-    'Sony',
-    'Huawei',
-    'Xiaomi'
-  ];
-
   const submit = (e) => {
     e.preventDefault();
-
     const fields = {
       name: inputName.current.value,
       email: inputEmail.current.value,
@@ -96,24 +87,7 @@ const Formulario = () => {
             error={errors.age}
           />
 
-          <div>
-            <label>¿Qué marca de móviles y smartphones te interesa más?:</label>
-            <select
-              ref={inputModel}
-              style={{
-                outline: errors.model && 'red',
-                borderColor: errors.model && 'red'
-              }}
-            >
-              <option value=''>Selecciona una marca</option>
-              {mobileBrands.map((brand) => (
-                <option key={brand} value={brand}>
-                  {brand}
-                </option>
-              ))}
-            </select>
-            {errors.model && <p style={{ color: 'red' }}>{errors.model}</p>}
-          </div>
+          <MobileBrandSelect refInput={inputModel} error={errors.model} />
 
           <FormInput
             label='¿Cómo te enteraste del concurso?'
@@ -123,19 +97,7 @@ const Formulario = () => {
             error={errors.concurso}
           />
 
-          <div className='terms'>
-            <label>Aceptación de Términos y Condiciones:</label>
-            <input
-              type='checkbox'
-              ref={inputTerms}
-              style={{
-                borderColor: errors.terms && 'red',
-                outline: errors.terms && 'red'
-              }}
-            />
-
-            {errors.terms && <p style={{ color: 'red' }}>{errors.terms}</p>}
-          </div>
+          <TermsCheckbox refInput={inputTerms} error={errors.terms} />
 
           <button type='submit'>Enviar</button>
         </form>

@@ -1,25 +1,24 @@
 import React from 'react';
-
-// Ajusta la ruta según tu estructura
-
+import './LikedProducts.css';
 import ProductCard from '../../components/Store/ProductCard/ProductCard';
 import useFavorites from '../../hooks/useFavorites';
 
+//Componente para mostrar los productos favoritos:
 const LikedProducts = () => {
   const { favorites } = useFavorites();
 
   return (
-    <div>
+    <main id='products'>
       {favorites.length > 0 ? (
-        <div id='products'>
+        <div >
           {favorites.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       ) : (
-        <p>No tienes productos favoritos.</p>
+        <p className='no-products'>No tienes productos favoritos.</p>
       )}
-    </div>
+    </main>
   );
 };
 

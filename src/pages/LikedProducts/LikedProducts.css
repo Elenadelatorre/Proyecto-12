@@ -1,19 +1,5 @@
-/* src/pages/Favorites/Favorites.css */
-
-.favorites {
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-
-.favorites h1 {
-  font-size: 2em;
+.no-products{
   text-align: center;
-  margin-bottom: 20px;
-}
-
-.favorites-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  margin-top: 100px;
+  font-size: 25px;
 }

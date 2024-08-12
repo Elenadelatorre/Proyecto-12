@@ -1,6 +1,4 @@
-// FormInput.js
-import React from 'react';
-
+// Componente para crear los campos de los formularios:
 const FormInput = ({ label, type, refInput, placeholder, error }) => {
   return (
     <div>

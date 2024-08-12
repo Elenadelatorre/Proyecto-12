@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Loading from '../../components/Loading/Loading';
 import ProductCard from '../../components/Store/ProductCard/ProductCard';
 
-//! Crear el componente 'Store' para obtener los productos de la tienda:
+// Componente 'Store' para obtener los productos de la tienda:
 const Store = () => {
   const [products, setProducts] = useState([]); // Almacenar la lista de productos.
   const [loading, setLoading] = useState(true); // Indicar si los datos se están cargando.

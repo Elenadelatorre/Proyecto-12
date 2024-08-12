@@ -1,9 +1,13 @@
+// RREDUCER:
+
+//Estados iniciales:
 export const initialState = {
   rating: 0,
   hoveredRating: 0,
   isFav: false,
 };
 
+//Función del reducer:
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'SET_RATING':

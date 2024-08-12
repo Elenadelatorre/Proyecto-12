@@ -1,5 +1,6 @@
 import './instructions.css';
 
+// Componente que muestra las instrucciones para completar el formulario:
 const Instructions = () => {
   return (
     <div>
