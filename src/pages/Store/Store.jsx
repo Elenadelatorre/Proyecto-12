@@ -9,6 +9,7 @@ const Store = () => {
 
   // Función para obtener los productos
   const fetchProducts = useCallback(async () => {
+    console.log('Soy el componente Store y me re-renderizo');
     setLoading(true); // Establecer el estado de la carga a TRUE (cargando) antes de ejecutar el fetch.
 
     try {
@@ -27,7 +28,7 @@ const Store = () => {
     fetchProducts();
   }, [fetchProducts]); // Dependencia en fetchProducts
 
-  console.log('Soy el componente Store y me re-renderizo');
+  
 
   return (
     <main id='products'>

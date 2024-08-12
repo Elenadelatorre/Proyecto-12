@@ -1,31 +1,47 @@
-import { createContext, useState, useCallback, useContext } from "react";
+import React, { createContext, useContext, useState, useCallback } from 'react';
 
-const FavoriteContext = createContext();
+const FavoritesContext = createContext();
 
-export const useFavorites = () => useContext(FavoriteContext);
-
-export const FavoriteProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState(new Set());
+export const FavoritesProvider = ({ children }) => {
+  const [favorites, setFavorites] = useState([]);
+  const [ratings, setRatings] = useState({});  // Nuevo estado para las calificaciones
 
   const addFavorite = useCallback((product) => {
-    setFavorites((prevFavorites) => new Set(prevFavorites).add(product.id));
+    setFavorites((prevFavorites) => [...prevFavorites, product]);
   }, []);
 
   const removeFavorite = useCallback((productId) => {
-    setFavorites((prevFavorites) => {
-      const newFavorites = new Set(prevFavorites);
-      newFavorites.delete(productId);
-      return newFavorites;
-    });
+    setFavorites((prevFavorites) => 
+      prevFavorites.filter((product) => product.id !== productId)
+    );
   }, []);
 
   const isFavorite = useCallback((productId) => {
-    return favorites.has(productId);
+    return favorites.some((product) => product.id === productId);
   }, [favorites]);
 
+  const setRating = useCallback((productId, rating) => {
+    setRatings((prevRatings) => ({ ...prevRatings, [productId]: rating }));
+  }, []);
+
+  const getRating = useCallback((productId) => {
+    return ratings[productId] || 0;
+  }, [ratings]);
+
   return (
-    <FavoriteContext.Provider value={{ addFavorite, removeFavorite, isFavorite }}>
+    <FavoritesContext.Provider value={{ 
+      favorites, 
+      addFavorite, 
+      removeFavorite, 
+      isFavorite,
+      setRating,  // Nuevo método para establecer calificación
+      getRating,  // Nuevo método para obtener calificación
+    }}>
       {children}
-    </FavoriteContext.Provider>
+    </FavoritesContext.Provider>
   );
+};
+
+export const useFavorites = () => {
+  return useContext(FavoritesContext);
 };
