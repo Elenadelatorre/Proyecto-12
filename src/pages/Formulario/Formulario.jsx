@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import './Formulario.css';
 import FormInput from '../../components/Form/FormInput/FormInput';
-import { validateFields } from '../../components/Form/ValidationInput/validators';
+import { validateFields } from '../../utils/validators';
 import SuccessMessage from '../../components/Form/CorrectForm/CorrectForm';
 import Instructions from '../../components/Form/Instructions/instructions';
 import MobileBrandSelect from '../../components/Form/MobileBrandSelect/MobileBrandSelect';

@@ -1,16 +1,23 @@
-import React, { useReducer, useEffect, useCallback, memo } from 'react';
+import React, {
+  useReducer,
+  useEffect,
+  useCallback,
+  memo,
+  useContext
+} from 'react';
 import './ProductCard.css';
 import { reducer, initialState } from '../../../utils/reducer';
-import useFavorites from '../../../hooks/useFavorites';
+import FavoritesContext from '../Providers/FavoritesContext';
 
 // Componente para renderizar cada producto en la tienda:
 const ProductCard = memo(({ product }) => {
-  const { addFavorite, removeFavorite, isFavorite, getRating, setRating } = useFavorites();
+  const { addFavorite, removeFavorite, isFavorite, getRating, setRating } =
+    useContext(FavoritesContext);
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     isFav: isFavorite(product.id),
-    rating: getRating(product.id),  // Inicializa el rating desde el contexto
+    rating: getRating(product.id) // Inicializa el rating desde el contexto
   });
 
   useEffect(() => {
@@ -20,16 +27,19 @@ const ProductCard = memo(({ product }) => {
     }
   }, [isFavorite, product.id, state.isFav]);
 
-  const handleRatingClick = useCallback((newRating) => {
-    if (newRating !== state.rating) {
-      setRating(product.id, newRating);  // Guarda el rating en el contexto
-      dispatch({ type: 'SET_RATING', payload: newRating });
-    }
-  }, [state.rating, product.id, setRating]);
+  const handleRatingClick = useCallback(
+    (newRating) => {
+      if (newRating !== state.rating) {
+        setRating(product.id, newRating); // Guarda el rating en el contexto
+        dispatch({ type: 'SET_RATING', payload: newRating });
+      }
+    },
+    [state.rating, product.id, setRating]
+  );
 
   const toggleFavorite = useCallback(() => {
     const newFavStatus = !state.isFav;
-    
+
     if (newFavStatus) {
       addFavorite(product);
     } else {

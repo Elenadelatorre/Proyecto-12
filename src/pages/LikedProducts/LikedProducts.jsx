@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './LikedProducts.css';
 import ProductCard from '../../components/Store/ProductCard/ProductCard';
-import useFavorites from '../../hooks/useFavorites';
+import FavoritesContext from '../../components/Store/Providers/FavoritesContext';
 
 //Componente para mostrar los productos favoritos:
 const LikedProducts = () => {
-  const { favorites } = useFavorites();
+  const { favorites } = useContext(FavoritesContext);
 
   return (
     <main id='products'>
       {favorites.length > 0 ? (
-        <div >
+        <div>
           {favorites.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
