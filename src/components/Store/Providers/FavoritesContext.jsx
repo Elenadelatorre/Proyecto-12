@@ -1,19 +1,19 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react';
-import { getFavoritesFromLocalStorage, saveFavoritesToLocalStorage } from '../../../utils/localStorageUtils';
+import { getFavoritesFromLocalStorage, saveFavoritesToLocalStorage, getRatingsFromLocalStorage, saveRatingsToLocalStorage } from '../../../utils/localStorageUtils';
 
-// Crear el contexto de favoritos:
+// Crear el contexto de favoritos y calificaciones
 const FavoritesContext = createContext();
 
-// Crear el proveedor de favoritos y calificaciones para poder acceder a ellos desde cualquier componente:
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState(getFavoritesFromLocalStorage());
-  const [ratings, setRatings] = useState({});
+  const [ratings, setRatings] = useState(getRatingsFromLocalStorage());
 
   useEffect(() => {
     saveFavoritesToLocalStorage(favorites);
-  }, [favorites]);
+    saveRatingsToLocalStorage(ratings);
+  }, [favorites, ratings]);
 
-  // Crear funciones para manipular favoritos:
+  // Funciones para manejar favoritos
   const addFavorite = useCallback((product) => {
     setFavorites((prevFavorites) => {
       const updatedFavorites = [...prevFavorites, product];
@@ -24,32 +24,27 @@ export const FavoritesProvider = ({ children }) => {
 
   const removeFavorite = useCallback((productId) => {
     setFavorites((prevFavorites) => {
-      const updatedFavorites = prevFavorites.filter(
-        (product) => product.id !== productId
-      );
+      const updatedFavorites = prevFavorites.filter((product) => product.id !== productId);
       saveFavoritesToLocalStorage(updatedFavorites);
       return updatedFavorites;
     });
   }, []);
 
   const isFavorite = useCallback(
-    (productId) => {
-      return favorites.some((product) => product.id === productId);
-    },
+    (productId) => favorites.some((product) => product.id === productId),
     [favorites]
   );
 
-  // Crear funciones para manejar calificaciones:
+  // Funciones para manejar calificaciones
   const setRating = useCallback((productId, rating) => {
-    setRatings((prevRatings) => ({ ...prevRatings, [productId]: rating }));
+    setRatings((prevRatings) => {
+      const updatedRatings = { ...prevRatings, [productId]: rating };
+      saveRatingsToLocalStorage(updatedRatings);
+      return updatedRatings;
+    });
   }, []);
 
-  const getRating = useCallback(
-    (productId) => {
-      return ratings[productId] || 0;
-    },
-    [ratings]
-  );
+  const getRating = useCallback((productId) => ratings[productId] || 0, [ratings]);
 
   return (
     <FavoritesContext.Provider

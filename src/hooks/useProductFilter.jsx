@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react';
 
-const useProductFilter = (products) => {
-  const [searchTerm, setSearchTerm] = useState(''); //Búsqueda
-  const [sortOrder, setSortOrder] = useState(''); //Filtro
+// Custom Hook para filtrar y ordenar los productos:
+const useProductFilter = (products, getRating) => {
+  const [searchTerm, setSearchTerm] = useState(''); // Búsqueda
+  const [sortOrder, setSortOrder] = useState(''); // Filtro
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
@@ -19,13 +20,13 @@ const useProductFilter = (products) => {
       sorted.sort((a, b) => a.price - b.price);
     } else if (sortOrder === 'price-desc') {
       sorted.sort((a, b) => b.price - a.price);
-    } else if (sortOrder === 'rating-asc') {
-      sorted.sort((a, b) => a.rating.rate - b.rating.rate);
     } else if (sortOrder === 'rating-desc') {
-      sorted.sort((a, b) => b.rating.rate - a.rating.rate);
+      sorted.sort((a, b) => (getRating(a.id) || 0) - (getRating(b.id) || 0));
+    } else if (sortOrder === 'rating-asc') {
+      sorted.sort((a, b) => (getRating(b.id) || 0) - (getRating(a.id) || 0));
     }
     return sorted;
-  }, [filteredProducts, sortOrder]);
+  }, [filteredProducts, sortOrder, getRating]);
 
   return {
     sortedProducts,
