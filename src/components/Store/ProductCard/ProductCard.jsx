@@ -45,7 +45,7 @@ const ProductCard = memo(({ product }) => {
         <img src={product.image} alt={product.title} />
       </div>
       <h2>{product.title}</h2>
-      <p>${product.price}</p>
+      <p>{product.price} €</p>
       <div className='rating' aria-label='Rating'>
         {[...Array(5)].map((_, index) => {
           const starRating = index + 1;
