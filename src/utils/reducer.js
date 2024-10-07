@@ -1,5 +1,3 @@
-// RREDUCER:
-
 //Estados iniciales:
 export const initialState = {
   rating: 0,
