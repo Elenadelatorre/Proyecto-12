@@ -3,7 +3,7 @@ import './Formulario.css';
 import FormInput from '../../components/Form/FormInput/FormInput';
 import { validateFields } from '../../utils/validators';
 import SuccessMessage from '../../components/Form/CorrectForm/CorrectForm';
-import Instructions from '../../components/Form/Instructions/instructions';
+import Instructions from '../../components/Form/Instructions/Instructions';
 import MobileBrandSelect from '../../components/Form/MobileBrandSelect/MobileBrandSelect';
 import TermsCheckbox from '../../components/Form/TermCheckbox/TermCheckbox';
 
